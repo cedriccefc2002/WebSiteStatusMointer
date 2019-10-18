@@ -17,6 +17,12 @@
   },
   "homepage": "https://github.com/cedriccefc2002/WebSiteStatusMointer#readme",
   "devDependencies": {
+    "@types/log4js": "^2.3.5",
+    "@types/request": "^2.48.3",
     "typescript": "^3.6.4"
+  },
+  "dependencies": {
+    "request": "^2.88.0",
+    "log4js": "^5.2.2"
   }
 }

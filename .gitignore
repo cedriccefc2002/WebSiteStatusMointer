@@ -64,3 +64,5 @@ typings/
 **/*.js
 
 package-lock.json
+
+**/*.log
