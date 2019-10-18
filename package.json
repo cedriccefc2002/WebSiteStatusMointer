@@ -1,0 +1,22 @@
+{
+  "name": "websitestatusmointer",
+  "version": "1.0.0",
+  "description": "定時監控網站狀態並紀錄",
+  "main": "index.js",
+  "scripts": {
+    "builld": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cedriccefc2002/WebSiteStatusMointer.git"
+  },
+  "author": "",
+  "license": "AGPL",
+  "bugs": {
+    "url": "https://github.com/cedriccefc2002/WebSiteStatusMointer/issues"
+  },
+  "homepage": "https://github.com/cedriccefc2002/WebSiteStatusMointer#readme",
+  "devDependencies": {
+    "typescript": "^3.6.4"
+  }
+}
