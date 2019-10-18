@@ -1,6 +1,6 @@
 import { configure, getLogger, Logger } from "log4js";
 
-import { MSleep, Request } from "./Lib";
+import { AppendFileAsync, MSleepAsync, RequestAsync } from "./Lib";
 
 configure({
     appenders: {
@@ -35,17 +35,18 @@ const Tests: ITest[] = [
 async function main() {
     while (true) {
         for (const Test of Tests) {
-            const resp = await Request({
+            const resp = await RequestAsync({
                 Url: Test.url,
             });
+            AppendFileAsync("./data.jsonl", `${JSON.stringify(resp)}\n`);
             if (resp.IsSuccess) {
                 Test.logger.info(`${Test.url} BodySize:${resp.BodySize} ElapsedTime: ${resp.EndTimeStamp - resp.StartTimeStamp} ms`);
             } else {
                 Test.logger.error(`${Test.url} ErrorMessage:${resp.ErrorMessage} ElapsedTime: ${resp.EndTimeStamp - resp.StartTimeStamp} ms`);
             }
-            await MSleep(1000);
+            await MSleepAsync(1000);
         }
-        await MSleep(60000);
+        await MSleepAsync(60000);
     }
 }
 
