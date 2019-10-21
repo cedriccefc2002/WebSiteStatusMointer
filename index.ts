@@ -29,8 +29,6 @@ const Tests: ITest[] = [
     createrTest("gcr", "https://gcr.io"),
     createrTest("googleapis", "https://ajax.googleapis.com"),
     createrTest("googleapis_auth", "https://www.googleapis.com/auth/drive.readonly"),
-    createrTest("dns", "http://ssss.sss.ss"),
-    createrTest("ip", "https://127.0.0.1"),
 ];
 async function main() {
     while (true) {
