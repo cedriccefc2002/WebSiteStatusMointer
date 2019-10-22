@@ -54,7 +54,7 @@ export async function RequestAsync(req: IRequest) {
                 ErrorMessage = `${error}`;
             }
             const BodySize = bodyString.length;
-            const StatusCode = IsSuccess ? response.statusCode : -1;
+            const StatusCode = response ? response.statusCode : -1;
             resolve({
                 Url: req.Url,
                 IsSuccess,
