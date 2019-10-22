@@ -4,6 +4,7 @@ import { appendFile, PathLike } from "fs";
 
 export interface IRequest {
     Url: string;
+    testFn?: (body: string, response: request.Response) => [boolean, string];
 }
 
 export interface IResponse {
@@ -13,6 +14,7 @@ export interface IResponse {
     StartTimeStamp: number;
     EndTimeStamp: number;
     BodySize: number;
+    StatusCode: number;
 }
 
 export async function MSleepAsync(timeout: number) {
@@ -38,9 +40,21 @@ export async function RequestAsync(req: IRequest) {
         const StartTimeStamp = Date.now();
         request.default(req.Url, (error, response, body) => {
             const EndTimeStamp = Date.now();
-            const IsSuccess = error === null ? true : false;
-            const ErrorMessage = `${error}`;
-            const BodySize = `${body}`.length;
+            const bodyString = `${body}`;
+            let IsSuccess = false;
+            let ErrorMessage = "";
+            if (error === null) {
+                if (req.testFn) {
+                    [IsSuccess, ErrorMessage] = req.testFn(bodyString, response);
+                } else {
+                    IsSuccess = true;
+                }
+            } else {
+                IsSuccess = false;
+                ErrorMessage = `${error}`;
+            }
+            const BodySize = bodyString.length;
+            const StatusCode = response.statusCode;
             resolve({
                 Url: req.Url,
                 IsSuccess,
@@ -48,6 +62,7 @@ export async function RequestAsync(req: IRequest) {
                 StartTimeStamp,
                 EndTimeStamp,
                 BodySize,
+                StatusCode,
             });
         });
     });
